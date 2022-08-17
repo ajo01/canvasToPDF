@@ -4,7 +4,7 @@ module.exports = {
   mode: "development",
   entry: "./index.js",
   output: {
-    path: path.resolve(__dirname, "../npm/package/bundle-dist"),
+    path: path.resolve(__dirname, "../npm/package"),
     filename: "canvasToPDF.js",
     libraryTarget: "umd",
     globalObject: "this",
