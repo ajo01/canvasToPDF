@@ -1,7 +1,7 @@
 import canvasToPDF from "@pdftron/canvas-to-pdf";
 import saveAs from "./FileSaver";
 
-const testCase = (ctx) => {
+const draw = (ctx) => {
   ctx.fillStyle = "red";
   ctx.lineWidth = "20";
   ctx.strokeStyle = "blue";
@@ -10,6 +10,6 @@ const testCase = (ctx) => {
   ctx.stroke();
 };
 
-canvasToPDF(testCase).then((res) => {
+canvasToPDF(draw).then((res) => {
   saveAs(res, "example.pdf", true);
 });
