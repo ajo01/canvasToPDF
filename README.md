@@ -29,7 +29,9 @@ You must rebuild the bundle folder each time you make change to any of its files
 
 ## Testing
 
-To verify the CanvasToPDF api is working as expected, you can run the automated tests in the jasmine-tests folder. To check that the npm package is working as expected, you can open live server and go to npm/test-folder in the browser. A PDF download should occur immediately with the expected vector appearance. The code responsible for the actual drawing is in the script.js under npm/test-folder. Modifying the draw command will change the annotation drawn the CanvasToPDF api in the live server for test-folder.
+To verify the CanvasToPDF api is working as expected, you can run the automated tests in the jasmine-tests folder. The tests are implemented using WebViewer's loadCanvas method, thus converting the blob that is returned by the CanvasToPDF api into a canvas. The data URL of each test case's annotation was stored to form regression tests.
+
+To check that the npm package is working as expected, you can open live server and go to npm/test-folder in the browser. A PDF download should occur immediately with the expected vector appearance. The code responsible for the actual drawing is in the script.js under npm/test-folder. Modifying the draw command will change the annotation drawn the CanvasToPDF api in the live server for test-folder.
 
 Example of modified draw function in script.js:
 
@@ -50,6 +52,7 @@ const draw = (ctx) => {
 ```
 
 Expected annotation from modified draw function
+
 <img width="450" alt="case2" src="https://user-images.githubusercontent.com/70789275/180508978-1b147c6d-746a-4ae9-a58b-67f41dc2ee5b.png">
 
 ## Commands
@@ -71,8 +74,12 @@ Note you must run this command every time you change any file under the bundle f
 
 ### Run tests
 
+Will run jasmine tests. Expect an automated browser to open.
+
 `npm run test`
 
 ### Publish npm package locally
+
+Will link files in npm/package to the node_modules in npm/test-folder. Any changes in npm/package will be reflected real time in test-folder.
 
 `npm-local-publish`
