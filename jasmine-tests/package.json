@@ -1,0 +1,20 @@
+{
+  "name": "karma-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-karma-jasmine": "^4.0.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.18.9",
+    "@pdftron/webviewer": "^8.7.0"
+  }
+}

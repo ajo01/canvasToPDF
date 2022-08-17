@@ -1,0 +1,22 @@
+{
+  "name": "@pdftron/canvas-to-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/canvasToPDF.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npx webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blob-stream": "file:./blob-stream.js",
+    "canvas2pdf": "file:./canvas2pdf.js",
+    "file-saver": "file:./FileSaver.js",
+    "pdfkit": "file:./pdfkit.standalone.js"
+  },
+  "devDependencies": {
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

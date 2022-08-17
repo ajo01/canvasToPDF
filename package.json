@@ -1,0 +1,12 @@
+{
+  "name": "canvastopdf",
+  "version": "1.0.0",
+  "description": "Requires: Node v16+",
+  "main": "index.js",
+  "scripts": {
+    "npm-local-publish":"cd npm/package && npm link && cd ../test-folder && npm link @pdftron/canvas-to-pdf && npm run build",
+    "setup":"cd bundle && npm i && cd ../jasmine-tests && npm i && cd ../npm/test-folder && npm i && cd ../package && npm link && cd ../test-folder && npm link @pdftron/canvas-to-pdf && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}
