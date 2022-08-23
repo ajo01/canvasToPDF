@@ -1,4 +1,4 @@
-import canvas2pdf from "./canvas2pdf";
+import canvas2pdf from "canvas2pdf";
 import blobStream from "blob-stream";
 
 const canvasToPDF = (fn) => {

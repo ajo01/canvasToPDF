@@ -4,6 +4,7 @@ module.exports = function (config) {
     basePath: "",
     //files/patterns to exclude from loaded files
     exclude: [],
+
     //files/patterns to load in the browser
     files: [
       { pattern: "tests/*.js", watched: true, served: true, included: true },
@@ -88,6 +89,7 @@ module.exports = function (config) {
        add `babel-loader` to the webpack configuration
        to make the ES6+ code readable by the browser */
     webpack: {
+      devtool: "cheap-eval-source-map",
       module: {
         rules: [
           {
