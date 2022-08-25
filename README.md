@@ -83,3 +83,7 @@ Will run jasmine tests. Expect an automated browser to open.
 Will link files in npm/package to the node_modules in npm/test-folder. Any changes in npm/package will be reflected real time in test-folder.
 
 `npm-local-publish`
+
+### Publish npm package privately
+
+`npm run publish-private`

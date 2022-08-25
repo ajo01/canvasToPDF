@@ -1,6 +1,6 @@
 {
   "name": "@pdftron/canvas-to-pdf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "canvasToPDF.js",
   "scripts": {

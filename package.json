@@ -7,7 +7,8 @@
     "npm-local-publish":"cd npm/package && npm link && cd ../test-folder && npm link @pdftron/canvas-to-pdf && npm run build",
     "setup":"cd bundle && npm i && cd ../jasmine-tests && npm i && cd ../npm/test-folder && npm i && cd ../package && npm link && cd ../test-folder && npm link @pdftron/canvas-to-pdf && npm run build",
     "build":"cd bundle && npm run build",
-    "test": "cd jasmine-tests && npm run test"
+    "test": "cd jasmine-tests && npm run test",
+    "publish-private": "npm login && cd npm/package && npm publish"
   },
   "author": "",
   "license": "ISC"

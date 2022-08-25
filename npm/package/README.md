@@ -75,6 +75,10 @@ This webpack configuration will expect an index.js file where CanvasToPDF is pre
 <script src="./dist/bundle.js"></script>
 ```
 
+## License
+
+MIT
+
 ## Notes
 
 - Some canvas 2d context methods are not implemented yet
