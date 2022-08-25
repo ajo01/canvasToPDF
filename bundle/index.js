@@ -3,9 +3,14 @@ import blobStream from "blob-stream";
 
 const canvasToPDF = (fn, size) => {
   var stream = blobStream();
-  var ctx = new canvas2pdf.PdfContext(stream, {
-    size: [size.width, size.height],
-  });
+  var ctx;
+  if (size) {
+    ctx = new canvas2pdf.PdfContext(stream, {
+      size: [size.width, size.height],
+    });
+  } else {
+    ctx = new canvas2pdf.PdfContext(stream);
+  }
   fn(ctx);
   ctx.end();
 
