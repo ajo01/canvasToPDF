@@ -14,6 +14,8 @@ const doc = await Core.createDocument(blob, { extension: "pdf" });
 annotation.addCustomAppearance(doc, { pageNumber: 1 });
 ```
 
+If you would like to see how this api works, a demo with React and WebViewer is available [here](https://github.com/PDFTron/canvasToPDF-webviewer-react-sample)
+
 ## How it works
 
 Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. These PDF drawing methods are what enables vector appearances to be created. Canvas2pdf initializes PDFDocument from PDFKit and calls on PDF drawing methods from PDFKit that are roughly equivalent to regular canvas methods. Note that because they are not perfectly equivalent, appearances produced by CanvasToPDF may be slightly off as in the case of calling `arc` or `bezierCurveTo`.
