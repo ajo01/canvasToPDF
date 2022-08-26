@@ -14,16 +14,81 @@ const doc = await Core.createDocument(blob, { extension: "pdf" });
 annotation.addCustomAppearance(doc, { pageNumber: 1 });
 ```
 
+## How it works
+
+Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. These PDF drawing methods are what enables vector appearances to be created. Canvas2pdf initializes PDFDocument from PDFKit and calls on PDF drawing methods from PDFKit that are roughly equivalent to regular canvas methods. Note that because they are not perfectly equivalent, appearances produced by CanvasToPDF may be slightly off as in the case of calling `arc` or `bezierCurveTo`.
+
+If a function follows `this.doc` like the `stroke` function below, then this is calling a PDFKit function. On the other hand, `this.restorePath` is not, so the `restorePath` is a function attached to the `canvas2pdf.PdfContext` itself.
+
+```js
+canvas2pdf.PdfContext.prototype.stroke = function () {
+  this.doc.stroke();
+  this.restorePath();
+};
+```
+
+CanvasToPDF is the improved version of the canvas2pdf as it does not have problem where calling fill or stroke consecutively only executes the first method. In this case, the obstacle arises from the fact that fill and stroke close the path, so the idea was that we would restore the path after either of them is called. How we can implement it is to have a stack variable that would keep track of our current path where every time a path modifying canvas method is called, we would add the method to the stack. When either fill or stroke is called, we would call all methods inside the stack to restore the path. Since methods that close the path such as fill or stroke are not added to the stack, the path would be “open” for the next fill or stroke to take effect.
+
+### Path Modifying Canvas Methods are Added to the Stack
+
+Unmodified Canvas2PDF moveTo method
+
+```js
+canvas2pdf.PdfContext.prototype.moveTo = function (x, y) {
+  this.doc.moveTo(x, y);
+};
+```
+
+Modified Canvas2PDF moveTo method
+
+```js
+canvas2pdf.PdfContext.prototype.moveTo = function (x, y) {
+  this.addToPath("moveTo", arguments);
+
+  this.doc.moveTo(x, y);
+};
+```
+
+Custom addToPath and restorePath implementation
+
+```js
+canvas2pdf.PdfContext.prototype.addToPath = function (command, params) {
+  this.stack.push({ command, params });
+};
+
+canvas2pdf.PdfContext.prototype.restorePath = function () {
+  this.stack.forEach((key) => {
+    this.doc[key.command].apply(this.doc, key.params);
+  });
+};
+```
+
+Stroke and Fill using restorePath function
+
+```js
+canvas2pdf.PdfContext.prototype.stroke = function () {
+  this.doc.stroke();
+  this._restorePath();
+};
+
+canvas2pdf.PdfContext.prototype.fill = function () {
+  this.doc.fill();
+  this._restorePath();
+};
+```
+
 ## Prerequisites
 
 Requires:
 
 - Node v16+
-- VSCode Live Server
+- VSCode Live Server or http-server for testing local npm packages in npm/test-folders
 
 ## Project structure
 
 The bundle folder has all the dependencies of the canvasToPDF api, such as canvas2pdf and pdfkit. It is responsible for bundling all dependencies as well as the api into a single canvasToPDF.js file under npm/package. This canvasToPDF.js file under npm/package is used by both the jasmine-tests and npm package manager.
+
+Both the canvas2pdf and pdfkit dependencies have been modified. Thus, they're reliant on forked versions of the originals held by PDFTron. You will find both dependencies in PDFTron/canvas2pdf in PDFTron's GitHub.
 
 You must rebuild the bundle folder each time you make change to any of its files. Changes in the canvasToPDF.js file will be reflected immediately in both these folders, provided you've run the setup and npm local publish commands respectively.
 
@@ -85,5 +150,7 @@ Will link files in npm/package to the node_modules in npm/test-folder. Any chang
 `npm-local-publish`
 
 ### Publish npm package privately
+
+Will publish the package privately to npm. Make sure to update the version in package.json in npm/package or publishing will fail.
 
 `npm run publish-private`
