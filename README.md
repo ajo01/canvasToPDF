@@ -29,7 +29,7 @@ canvas2pdf.PdfContext.prototype.stroke = function () {
 
 CanvasToPDF is the improved version of the canvas2pdf as it does not have problem where calling fill or stroke consecutively only executes the first method. In this case, the obstacle arises from the fact that fill and stroke close the path, so the idea was that we would restore the path after either of them is called. How we can implement it is to have a stack variable that would keep track of our current path where every time a path modifying canvas method is called, we would add the method to the stack. When either fill or stroke is called, we would call all methods inside the stack to restore the path. Since methods that close the path such as fill or stroke are not added to the stack, the path would be “open” for the next fill or stroke to take effect.
 
-### Path Modifying Canvas Methods are Added to the Stack
+Path Modifying Canvas Methods are Added to the Stack
 
 Unmodified Canvas2PDF moveTo method
 
@@ -76,6 +76,8 @@ canvas2pdf.PdfContext.prototype.fill = function () {
   this._restorePath();
 };
 ```
+
+For more information, read Developing Client Side Tool to Create Vector PDF Appearances on Confluence.
 
 ## Prerequisites
 
