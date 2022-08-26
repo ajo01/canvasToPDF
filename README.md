@@ -18,7 +18,7 @@ If you would like to see how this api works, a demo with React and WebViewer is 
 
 ## How it works
 
-Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. These PDF drawing methods are what enables vector appearances to be created. Canvas2pdf initializes PDFDocument from PDFKit and calls on PDF drawing methods from PDFKit that are roughly equivalent to regular canvas methods. Note that because they are not perfectly equivalent, appearances produced by CanvasToPDF may be slightly off as in the case of calling `arc` or `bezierCurveTo`.
+Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. These PDF drawing methods are what enables vector appearances to be created. Canvas2pdf initializes a PDFDocument and calls on PDF drawing methods from PDFKit that are roughly equivalent to regular canvas methods. Note that because they are not perfectly equivalent, appearances produced by CanvasToPDF may be slightly off as in the case of calling `arc` or `bezierCurveTo`.
 
 If a function follows `this.doc` like the `stroke` function below, then this is calling a PDFKit function. On the other hand, `this.restorePath` is not, so the `restorePath` is a function attached to the `canvas2pdf.PdfContext` itself.
 
@@ -29,9 +29,7 @@ canvas2pdf.PdfContext.prototype.stroke = function () {
 };
 ```
 
-CanvasToPDF is the improved version of the canvas2pdf as it does not have problem where calling fill or stroke consecutively only executes the first method. In this case, the obstacle arises from the fact that fill and stroke close the path, so the idea was that we would restore the path after either of them is called. How we can implement it is to have a stack variable that would keep track of our current path where every time a path modifying canvas method is called, we would add the method to the stack. When either fill or stroke is called, we would call all methods inside the stack to restore the path. Since methods that close the path such as fill or stroke are not added to the stack, the path would be “open” for the next fill or stroke to take effect.
-
-Path Modifying Canvas Methods are Added to the Stack
+CanvasToPDF has several improvements compared to canvas2pdf. One such improvement is that it does not have problem where calling fill or stroke consecutively only executes the first method. In this case, the obstacle arises from the fact that fill and stroke close the path, so the idea was that we would restore the path after either of them is called. How we can implement it is to have a stack variable that would keep track of our current path where every time a path modifying canvas method is called, we would add the method to the stack. When either fill or stroke is called, we would call all methods inside the stack to restore the path. Since methods that close the path such as fill or stroke are not added to the stack, the path would be “open” for the next fill or stroke to take effect.
 
 Unmodified Canvas2PDF moveTo method
 
@@ -70,12 +68,12 @@ Stroke and Fill using restorePath function
 ```js
 canvas2pdf.PdfContext.prototype.stroke = function () {
   this.doc.stroke();
-  this._restorePath();
+  this.restorePath();
 };
 
 canvas2pdf.PdfContext.prototype.fill = function () {
   this.doc.fill();
-  this._restorePath();
+  this.restorePath();
 };
 ```
 
