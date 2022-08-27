@@ -128,10 +128,7 @@ Expected annotation from modified draw function
 
 From the project root directory run
 
-1. `npm run setup`
-2. Update the draw function in script.js file
-3. Run `npm run build`
-4. Open live server or http-server
+`npm run setup`
 
 ### Build
 
@@ -144,6 +141,12 @@ Note you must run this command every time you change any file under the bundle f
 Will run jasmine tests. Expect an automated browser to open.
 
 `npm run test`
+
+### Manually test npm package locally
+
+1. Update the draw function in script.js file
+2. Run `npm run build`
+3. Open live server or http-server on npm/test-folder
 
 ### Publish npm package locally
 

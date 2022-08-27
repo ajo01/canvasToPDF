@@ -14,8 +14,6 @@ CanvasToPDF has one optional dependency: FileSaver. The CanvasToPDF api returns 
 
 ## Usage
 
-To use the CanvasToPDF package, you will have to have a webpack environment prepared.
-
 CanvasToPDF currently only supports client-side usage. You can use CanvasToPDF by creating an index.js file with code similar to the one below.
 
 Sample Code for Using CanvasToPDF
