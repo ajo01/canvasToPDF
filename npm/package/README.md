@@ -8,15 +8,19 @@ Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call 
 
 <img width="450" alt="Screen Shot 2022-08-18 at 10 23 15 AM" src="https://user-images.githubusercontent.com/70789275/185456754-0e54f33e-5c88-41cb-8821-3876f1ff5c4e.png">
 
+CanvasToPDF internally manages a mock 2d canvas context. Thus, you only need to pass a draw function calling on canvas commands and not the canvas itself.
+
 ## Dependencies
 
-CanvasToPDF has one optional dependency: FileSaver. The CanvasToPDF api returns a blob containing the annotations, but since it is difficult to check that the blob has the expected images drawn you can use FileSaver to download an actual PDF.
+- canvas2pdf
+- PDFKit
+- blob-stream
 
 ## Usage
 
 CanvasToPDF currently only supports client-side usage. You can use CanvasToPDF by creating an index.js file with code similar to the one below.
 
-Sample Code for Using CanvasToPDF
+### Sample Code for Using CanvasToPDF
 
 ```js
 import canvasToPDF from "@pdftron/canvas-to-pdf";
@@ -31,7 +35,9 @@ canvasToPDF(draw).then((res) => {
 });
 ```
 
-Sample Code for Drawing Vector Appearances
+The CanvasToPDF api returns a blob containing vector graphics, but since it is difficult to check that the blob has the expected images drawn you can use FileSaver to download an actual PDF as seen in the code above.
+
+### Sample Code for Drawing Vector Appearances
 
 ```js
 const draw = (ctx) => {
