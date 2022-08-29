@@ -9,6 +9,7 @@ const canvasToPDF = (fn, size) => {
       size: [size.width, size.height],
     });
   } else {
+    // for jasmine tests
     ctx = new canvas2pdf.PdfContext(stream);
   }
   fn(ctx);

@@ -485,12 +485,11 @@ describe("createAppearance", async function () {
     let caseNumber = 8;
     return runTestCase(caseNumber, evaluate, expectedCase8);
   });
-  // expected to fail, canvas missing an entire rectangle
+  // edge case, canvas missing rectangle
   it("case 9 arc then rect", async function () {
     let caseNumber = 9;
     return runTestCase(caseNumber, evaluate, expectedCase9);
   });
-  // expected to fail
   it("case 10 fillText", async function () {
     let caseNumber = 10;
     return runTestCase(caseNumber, evaluate, expectedCase10);
@@ -569,7 +568,7 @@ describe("createAppearance", async function () {
     let caseNumber = 32;
     return runTestCase(caseNumber, evaluate, expectedCase32);
   });
-  // expected to fail; currently linewidth less than 1 is not supported
+  // currently linewidth less than 1 is not supported
   it("case 33 small linewidth less than 1", async function () {
     let caseNumber = 33;
     return runTestCase(caseNumber, evaluate, expectedCase33);
