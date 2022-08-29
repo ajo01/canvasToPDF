@@ -6,7 +6,7 @@ This repository contains the webpack bundler, npm package manager, and tests for
 
 Annotation appearances are a special way of rendering an annotation inside a PDF and can be useful in scenarios where users require custom annotations. Usually appearances involve rasterization, leading to blurriness of the annotation when you zoom in. Note that this library generates actual PDF drawing calls to create a PDF with vector graphics.
 
-The canvasToPDF api allows a user to call canvas methods on a pdf to create appearances. It takes in a function containing canvas methods as a parameter and outputs a blob. A user can then optionally use the FileSaver dependency to convert the blob to a pdf and download it as it does in this repo. Or a user can use the blob with other apis such as Pdftron's WebViewer to make further modifications.
+The canvasToPDF api allows a user to call canvas methods on a pdf to create vector appearances. It takes in a function containing canvas methods as a parameter and outputs a blob. A user can then optionally use the FileSaver dependency to convert the blob to a pdf and download it as it does in this repo. Or a user can use the blob with other apis such as Pdftron's WebViewer to make further modifications.
 
 ```js
 const blob = await canvasToPDF(draw);
@@ -88,9 +88,9 @@ Requires:
 
 ## Project structure
 
-The bundle folder has all the dependencies of the CanvasToPDF api, such as canvas2pdf and pdfkit. It is responsible for bundling all dependencies as well as the api into a single canvasToPDF.js file under npm/package. This canvasToPDF.js file under npm/package is used by both the jasmine-tests and npm package manager.
+The bundle folder has all the dependencies of the CanvasToPDF api, such as canvas2pdf and pdfkit. It is responsible for bundling all dependencies as well as the api into a **single canvasToPDF.js file under npm/package. This canvasToPDF.js file under npm/package is used by both the jasmine-tests and npm package manager.**
 
-Both the canvas2pdf and pdfkit dependencies have been modified. Thus, they're reliant on forked versions of the originals held by PDFTron. You will find both dependencies in PDFTron/canvas2pdf in PDFTron's GitHub.
+Both the canvas2pdf and pdfkit dependencies have been modified. Thus, they're **reliant on forked versions of the originals held by PDFTron**. You will find both dependencies in PDFTron/canvas2pdf in PDFTron's GitHub.
 
 You must rebuild the bundle folder each time you make change to any of its files. Changes in the canvasToPDF.js file will be reflected immediately in both these folders, provided you've run the setup and npm local publish commands respectively.
 
