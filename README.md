@@ -88,7 +88,7 @@ Requires:
 
 ## Project structure
 
-The bundle folder has all the dependencies of the canvasToPDF api, such as canvas2pdf and pdfkit. It is responsible for bundling all dependencies as well as the api into a single canvasToPDF.js file under npm/package. This canvasToPDF.js file under npm/package is used by both the jasmine-tests and npm package manager.
+The bundle folder has all the dependencies of the CanvasToPDF api, such as canvas2pdf and pdfkit. It is responsible for bundling all dependencies as well as the api into a single canvasToPDF.js file under npm/package. This canvasToPDF.js file under npm/package is used by both the jasmine-tests and npm package manager.
 
 Both the canvas2pdf and pdfkit dependencies have been modified. Thus, they're reliant on forked versions of the originals held by PDFTron. You will find both dependencies in PDFTron/canvas2pdf in PDFTron's GitHub.
 
@@ -121,6 +121,8 @@ const draw = (ctx) => {
 Expected annotation from modified draw function
 
 <img width="450" alt="case2" src="https://user-images.githubusercontent.com/70789275/180508978-1b147c6d-746a-4ae9-a58b-67f41dc2ee5b.png">
+
+The npm/test-folder is also a sample for how you may setup your code to use CanvasToPDF. If not using the CanvasToPDF npm package, you will likely have to use a module bundler such as Webpack to load the api in.
 
 ## Commands
 
