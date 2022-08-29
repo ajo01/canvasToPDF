@@ -53,26 +53,6 @@ The above code will draw multiple circles with gradient borders:
 
 <img width="450" alt="case2" src="https://user-images.githubusercontent.com/70789275/180508978-1b147c6d-746a-4ae9-a58b-67f41dc2ee5b.png">
 
-Sample Webpack Configuration
-
-```js
-const webpack = require("webpack");
-const path = require("path");
-module.exports = {
-  entry: "./index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-  },
-};
-```
-
-This webpack configuration will expect an index.js file where CanvasToPDF is presumably being used and produce a bundle.js file under a dist folder. You can then directly load bundle.js in an index.html file just like any other script.
-
-```html
-<script src="./dist/bundle.js"></script>
-```
-
 ## License
 
 MIT
