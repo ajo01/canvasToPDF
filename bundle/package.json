@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "blob-stream": "file:blob-stream",
-    "canvas2pdf": "git+https://github.com/PDFTron/canvas2pdf.git#v1.0.8"
+    "canvas2pdf": "git+https://github.com/PDFTron/canvas2pdf.git#v1.0.9"
   },
   "devDependencies": {
     "webpack": "^5.74.0",
