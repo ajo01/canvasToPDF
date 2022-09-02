@@ -1,10 +1,10 @@
 # CanvasToPDF
 
-CanvasToPDF can create vector quality PDF images using the canvas API.
+CanvasToPDF can create vector quality PDFs using the canvas API.
 
 ## How it works
 
-Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. CanvasToPDF has several notable improvements from canvas2pdf in that it has no issues calling fill and stroke consecutively and that reading canvas properties (such as lineWidth) do not lead to errors. Thus, you can create vectorized images such as the one below.
+Internally, CanvasToPDF uses modified versions of canvas2pdf and PDFKit to call on actual PDF drawing methods. CanvasToPDF has several notable improvements from canvas2pdf in that it has no issues calling fill and stroke consecutively and that reading canvas properties do not lead to errors. Thus, you can create vectorized PDFs such as the one below.
 
 <img width="450" alt="Screen Shot 2022-08-18 at 10 23 15 AM" src="https://user-images.githubusercontent.com/70789275/185456754-0e54f33e-5c88-41cb-8821-3876f1ff5c4e.png">
 
@@ -18,7 +18,7 @@ CanvasToPDF internally manages a mock 2d canvas context. Thus, you only need to 
 
 ## Usage
 
-CanvasToPDF currently only supports client-side usage. You can use CanvasToPDF by creating an index.js file with code similar to the one below.
+CanvasToPDF currently only supports client-side usage. You can use this library similar to the manner below.
 
 ### Sample Code for Using CanvasToPDF
 
@@ -30,14 +30,14 @@ const draw = (ctx) => {
   // canvas methods
 };
 
-canvasToPDF(draw).then((res) => {
+canvasToPDF(draw, { width: 100, height: 150 }).then((res) => {
   saveAs(res, "example.pdf", true);
 });
 ```
 
-The CanvasToPDF api returns a blob containing vector graphics, but since it is difficult to check that the blob has the expected images drawn you can use FileSaver to download an actual PDF as seen in the code above.
+The canvasToPDF function returns a blob containing vector graphics based PDF file, but since it is difficult to check that the blob has the expected images drawn you can use FileSaver to download an actual PDF as seen in the code above.
 
-### Sample Code for Drawing Vector Appearances
+### Sample Code for Drawing Vector PDF
 
 ```js
 const draw = (ctx) => {

@@ -147,7 +147,7 @@ Will run jasmine tests. Expect an automated browser to open.
 ### Manually test npm package locally
 
 1. Update the draw function in script.js file
-2. Run `npm run build`
+2. Run `npm run build` from the `npm/test-folder` directory
 3. Open live server or http-server on npm/test-folder
 
 ### Publish npm package locally
@@ -161,3 +161,8 @@ Will link files in npm/package to the node_modules in npm/test-folder. Any chang
 Will publish the package privately to npm. Make sure to update the version in package.json in npm/package or publishing will fail.
 
 `npm run publish-private`
+
+### Publish npm package publicly
+Will publish the package publicly to npm. Make sure to update the version in package.json in npm/package or publishing will fail.
+
+`npm run publish-public`
